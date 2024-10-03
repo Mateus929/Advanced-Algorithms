@@ -15,7 +15,7 @@ class BipartiteGraph(Graph):
         """
         if not self._check_for_bipartite():
             raise Exception("graph is not bipartite, hence cannot be locked")
-        self.locked = True
+        super().lock()
 
     def _check_for_bipartite(self):
         color = {}
