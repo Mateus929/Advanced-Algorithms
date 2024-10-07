@@ -74,7 +74,7 @@ class Graph:
         else:
             return None
 
-    def get_neighbours_iterator(self, v):
+    def get_neighbors_iterator(self, v):
         """
         Return an iterator for the neighbours of vertex v.
         """
@@ -96,6 +96,18 @@ class Graph:
             matrix[i, j] = 1
 
         return matrix
+
+    def visualize(self, path: str = "graph.jpg") -> None:
+        """
+        Tool for seeing graph visually.
+        Gets and argument in format path/name.jpg and saves a jpg picture on that path.
+        """
+        import matplotlib.pyplot as plt
+        import networkx as nx
+        G = nx.Graph()
+        G.add_edges_from(self.edges)
+        nx.draw(G, with_labels=True)
+        plt.savefig(path, format="jpg")
 
 
 # Example Usage
@@ -125,10 +137,12 @@ if __name__ == "__main__":
 
     # Get neighbours of a vertex
     vertex = 2
-    print(f"\nNeighbours of vertex {vertex}:", graph.get_neighbours(vertex))
+    print(f"\nNeighbours of vertex {vertex}:", graph.get_neighbors(vertex))
 
     # Iterate through neighbours of vertex
     print(f"Iterating through neighbours of vertex {vertex}:")
-    neighbours_iterator = graph.get_neighbours_iterator(vertex)
+    neighbours_iterator = graph.get_neighbors_iterator(vertex)
     for neighbour in neighbours_iterator:
         print(neighbour)
+
+    graph.visualize()
